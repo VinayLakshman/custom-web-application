@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Profile Page
+    </title>
+    <link href="{% static '/css/profile_page.css' %}" rel="stylesheet">
+    <script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+}
+
+  function closeAlert() {
+  document.getElementById("notif").style.display = "none";
+}
+</script>
+</head>
+
+    <body>
+    <div class="logo">
+    {% if user.department == 'admin' %}
+    <div class="back_cont"><a class="profilebtn" href="{% url 'Admin Page' %}">back</a></div>
+    {% endif %}
+    {% if user.department == 'logistic' %}
+        <div class="back_cont"><a class="profilebtn" href="{% url 'Logistics Page' %}">back</a></div>
+    {% endif %}
+    </div>
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-dismissible alert-success" id="notif">
+      <button type="button" class="close" data-dismiss="alert" onclick="closeAlert()">
+      ×
+      </button>
+      <strong>{{message}}</strong>
+    </div>
+ {% endfor %}
+{% endif %}
+        <div class="user_cont">
+            <p class="user_data_head">WELCOME TO YOUR PROFILE PAGE</p>
+            <table>
+               <tr>
+                <td class="user_data_head">USER INFORMATION:</td>
+              </tr>
+               <tr>
+                   <td class="user_data">EMPLOYEE ID -</td> <td class="user_data_db">{{ user.empid }} </td>
+              </tr>
+              <tr>
+                  <td class="user_data">EMPLOYEE EMAIL ID -</td> <td class="user_data_db">{{ user.email }} </td>
+              </tr>
+                <tr>
+                    <td class="user_data">EMPLOYEE DEPARTMENT -</td><td class="user_data_db"> {{ user.department }} </td>
+              </tr>
+            </table>
+        </div>
+<div class="password_cont" align="center">
+    <a class="profilebtn" onclick="openForm()">Update Password</a>
+</div>
+
+<div class="form-popup" id="myForm">
+  <form action="" method="post" class="form-container">
+      {% csrf_token %}
+    <h2>Update Password</h2>
+    {{ updatepassword.as_p }}
+    <button type="submit" name="updatepass" class="btn">Update</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Account</title>
+    <link rel="stylesheet" href="{% static 'css/home_page.css' %}"
+</head>
+<body>
+<div id="add_acc_background">
+<h2 class="sub_head" id="add_acc_head">ACCOUNT CREATION:</h2>
+{% if emp_id %}
+    <div class="notif"> The employee has been added successfully with Employee ID: {{ emp_id }} </div>
+
+{% endif %}
+
+  <div class="admin">
+
+ <form method="POST" action="{% url 'Admin Module- Add Account' %}" >
+     {% csrf_token %}
+ {{ adminform.as_p }}
+<input type="submit" value="Create Account">
+ </form>
+  </div>
+</div>
+
+</body>
+</html>

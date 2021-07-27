@@ -1,0 +1,103 @@
+{% extends "Receive module/basic.html" %}
+{% load crispy_forms_filters %}
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-dismissible alert-success" id="notif">
+      <button type="button" class="close" data-dismiss="alert" onclick="closeAlert()"> × </button>
+      <strong>{{message}}</strong>
+    </div>
+ {% endfor %}
+{% endif %}
+<h3>Logistic Details</h3>
+<form method="post" action="">
+  {% csrf_token %}
+    {{ form.non_field_errors|as_crispy_errors }}
+*pick any one* (by hand/by courier)<br>
+            <input type="button" id="byhand" value="By Hand"> <br>
+            <div id="bh_cont" style="display:none">
+                <div class="fieldWrapper">
+                {{ form.Person_Name.errors|as_crispy_errors }}
+                {{ form.Person_Name|as_crispy_field }}
+                </div>
+                <div class="fieldWrapper">
+                {{ form.Contact_Number.errors|as_crispy_errors }}
+                {{ form.Contact_Number|as_crispy_field }}
+                </div>
+            </div>
+            <input type="button" id="bycourier" value="By courier"><br>
+            <div id="bc_cont" style="display:none" >
+                <div class="fieldWrapper">
+                {{ form.Courier_Name.errors|as_crispy_errors }}
+                {{ form.Courier_Name|as_crispy_field }}
+                </div>
+                <div class="fieldWrapper">
+                {{ form.Tracking_ID.errors|as_crispy_errors }}
+                {{ form.Tracking_ID|as_crispy_field }}
+                </div>
+            </div>
+
+
+    <div class="form_cont">
+        <div class="fieldWrapper">
+    {{ form.DC_Number.errors|as_crispy_errors }}
+    {{ form.DC_Number|as_crispy_field }}
+</div>
+            <div class="fieldWrapper">
+    {{ form.DC_Date.errors|as_crispy_errors }}
+        <label for="dcd">DC Date</label><br>
+    <input type="date" name="DCDate" id="dcd" required="required">
+</div>
+        <div class="fieldWrapper">
+            {{ form.Customer_Name.errors|as_crispy_errors }}
+            {{ form.Customer_Name|as_crispy_field }}
+        </div>
+
+    <div class="fieldWrapper">
+    {{ form.Received_From.errors|as_crispy_errors }}
+    {{ form.Received_From|as_crispy_field }}
+</div>
+    <div class="fieldWrapper">
+    {{ form.Number_Of_Boxes.errors|as_crispy_errors }}
+    {{ form.Number_Of_Boxes|as_crispy_field }}
+</div>
+
+
+    <div class="fieldWrapper">
+    {{ form.without_document.errors|as_crispy_errors }}
+    {{ form.without_document|as_crispy_field }}
+</div>
+    <div class="fieldWrapper">
+    {{ form.WD_comments.errors|as_crispy_errors }}
+    {{ form.WD_comments|as_crispy_field }}
+</div>
+    <div class="fieldWrapper">
+    {{ form.Damage_Shipment.errors|as_crispy_errors }}
+    {{ form.Damage_Shipment|as_crispy_field }}
+</div>
+    <div class="fieldWrapper">
+    {{ form.DS_comments.errors|as_crispy_errors }}
+    {{ form.DS_comments|as_crispy_field }}
+</div>
+    <div class="fieldWrapper">
+    {{ form.Short_or_Excess_Shipment.errors|as_crispy_errors }}
+    {{ form.Short_or_Excess_Shipment|as_crispy_field }}
+</div>
+    <div class="fieldWrapper">
+    {{ form.SE_comments.errors|as_crispy_errors }}
+    {{ form.SE_comments|as_crispy_field }}
+</div>
+        <div class="fieldWrapper">
+    {{ form.Unit_Value.errors|as_crispy_errors }}
+    {{ form.Unit_Value|as_crispy_field }}
+</div>
+        <div class="fieldWrapper">
+    {{ form.Currency_Format.errors|as_crispy_errors }}
+    {{ form.Currency_Format|as_crispy_field }}
+</div>
+
+  <input type="submit" value="submit">
+    </div>
+
+</form>
+{% endblock %}

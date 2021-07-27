@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
+
+        <script>
+         function closeAlert() {
+             document.getElementById("notif").style.display = "none";
+         }
+
+         //Get the button
+         document.addEventListener('DOMContentLoaded',() => {
+const mybutton = document.getElementById("scrollupbtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+         });
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+    function ShowModule(id) {
+        document.getElementById(id).style.display='block';
+    }
+    function closeModule(id) {
+        document.getElementById(id).style.display='none';
+    }
+    </script>
+
+</head>
+
+<body>
+<div class="navbar">
+
+         <div class="user_cont">
+             <a class="userbtn" onClick="document.getElementById('userprofileform').submit()" target="_blank" rel="nofollow noopener">Profile</a>
+             <a class="userbtn" onClick="document.getElementById('logoutform').submit()" target="_blank" rel="nofollow noopener">Logout</a>
+         </div>
+</div>
+<form id="logoutform" method="POST" action="{% url 'logout user' %}">
+{% csrf_token %}
+<input type="hidden">
+</form>
+<form id="userprofileform" method="POST" action="{% url 'user profile' %}">
+{% csrf_token %}
+<input type="hidden">
+</form>
+
+    <div class="openingpage" id="startdiv">
+         <button onclick="topFunction()" id="scrollupbtn" title="Go to top">Back to Top</button>
+         <h1 class="main_head">Available Modules:</h1>
+    <ul>
+        <a class="btn" href="#adhead"><li><span>Admin</span></li></a>
+        <a class="btn" href="#lohead"><li><span>Logistics</span></li></a>
+    </ul>
+    </div>
+    <div class="admin_head" id="adhead">
+        <h1 class="main_head">Admin Modules:</h1>
+    <ul>
+        <a class="btn" href="{% url 'Admin Module- Add Account' %}" target="_blank"><li><span>Add Account</span></li></a>
+        <a class="btn" href="{% url 'Admin Module- Password Reset' %}" target="_blank"><li><span>Password Reset</span></li></a>
+    </ul>
+
+</div>
+
+<div class="logistics_head" id="lohead">
+    <h1 class="main_head">Logistic Modules:</h1>
+ <ul>
+  <a onclick="ShowModule('receive_cont')"><li class="logisticbtn"><span>Receive</span></li></a>
+</ul>
+            <div id="receive_cont">
+                <button class="closebtn" onclick="closeModule('receive_cont')"> X </button>
+     <ul>
+  <a href="{% url 'Receive Module- Logistic Details' %}" target="_blank"><li class="receivemodbtn"><span>Logistic Details</span></li></a>
+  <a href="{% url 'Receive Module- Unit Details' %}" target="_blank"><li class="receivemodbtn"><span>Unit Details</span></li></a>
+</ul>
+</div>
+</div>
+
+
+
+</body>
+</html>

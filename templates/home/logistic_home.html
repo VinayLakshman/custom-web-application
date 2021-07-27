@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+        <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
+</head>
+
+<script>
+    function ShowModule(id) {
+        document.getElementById(id).style.display='block';
+    }
+    function closeModule(id) {
+        document.getElementById(id).style.display='none';
+    }
+</script>
+<body>
+<div class="navbar">
+     <div class="user_cont">
+         <a class="userbtn" onClick="document.getElementById('userprofileform').submit()" target="_blank" rel="nofollow noopener">Profile</a>
+         <a class="userbtn" onClick="document.getElementById('logoutform').submit()" target="_blank" rel="nofollow noopener">Logout</a>
+     </div>
+</div>
+<form id="logoutform" method="POST" action="{% url 'logout user' %}">
+{% csrf_token %}
+<input type="hidden">
+</form>
+<form id="userprofileform" method="POST" action="{% url 'user profile' %}">
+{% csrf_token %}
+<input type="hidden">
+</form>
+        <div class="logistics_head" id="startdiv">
+        <h1 class="main_head">Available Modules:</h1>
+ <ul>
+  <a onclick="ShowModule('receive_cont')"><li class="logisticbtn"><span>Receive</span></li></a>
+</ul>
+            <div id="receive_cont">
+                <button class="closebtn" onclick="closeModule('receive_cont')"> X </button>
+     <ul>
+  <a href="{% url 'Receive Module- Logistic Details' %}" target="_blank"><li class="receivemodbtn"><span>Logistic Details</span></li></a>
+  <a href="{% url 'Receive Module- Unit Details' %}" target="_blank"><li class="receivemodbtn"><span>Unit Details</span></li></a>
+</ul>
+</div>
+</div>
+
+</body>
+</html>
