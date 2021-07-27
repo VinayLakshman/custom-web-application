@@ -8,4 +8,4 @@
 - Password:uvwxyz54321
 - Department: Logistic
 
-Link to web-app: vinaylakshman.pythonanywhere.com
+Link to web-app: http://vinaylakshman.pythonanywhere.com/
