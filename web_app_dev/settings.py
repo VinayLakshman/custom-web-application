@@ -81,12 +81,12 @@ WSGI_APPLICATION = 'web_app_dev.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodatabase',
-        'USER': 'sms_plus_web_app',
-        'PASSWORD': 'smsplus#9514',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql',   #mysql database
+        'NAME': 'Name_of_your_Database',
+        'USER': 'UserName_of_Database',
+        'PASSWORD': 'Password_of_database',
+        'HOST': 'localhost',    #default host
+        'PORT': '3306',         #default port
     }
 }
 
